@@ -1,73 +1,66 @@
-(format t "~%========== CALCULADORA LISP ==========")
-(format t "~%1. Suma")
-(format t "~%2. Resta")
-(format t "~%3. Multiplicacion")
-(format t "~%4. Division")
-(format t "~%5. Area de cuadrado")
-(format t "~%6. Area de rectangulo")
+(defun pedir-numero (mensaje)
+  (format t "~%~A" mensaje)
+  (force-output)
+  (read))
 
-(format t "~%~%Seleccione una opcion: ")
-(force-output)
+(loop
+  (format t "~%========== CALCULADORA LISP ==========")
+  (format t "~%1. Suma")
+  (format t "~%2. Resta")
+  (format t "~%3. Multiplicacion")
+  (format t "~%4. Division")
+  (format t "~%5. Area de cuadrado")
+  (format t "~%6. Area de rectangulo")
+  (format t "~%0. Salir")
+  (format t "~%Seleccione una opcion: ")
+  (force-output)
 
-(let ((opcion (read)))
+  (let ((opcion (read)))
 
-  (cond
+    (cond
 
-   ;; SUMA
-   ((= opcion 1)
-    (format t "~%Ingrese el primer numero: ")
-    (force-output)
-    (let ((a (read)))
-      (format t "Ingrese el segundo numero: ")
-      (force-output)
-      (let ((b (read)))
-        (format t "~%Resultado de la suma: ~A~%" (+ a b)))))
+      ;; SALIR
+      ((= opcion 0)
+       (format t "~%Saliendo del programa...")
+       (return))
 
-   ;; RESTA
-   ((= opcion 2)
-    (format t "~%Ingrese el primer numero: ")
-    (force-output)
-    (let ((a (read)))
-      (format t "Ingrese el segundo numero: ")
-      (force-output)
-      (let ((b (read)))
-        (format t "~%Resultado de la resta: ~A~%" (- a b)))))
+      ;; SUMA
+      ((= opcion 1)
+       (let ((a (pedir-numero "Ingrese el primer numero: "))
+             (b (pedir-numero "Ingrese el segundo numero: ")))
+         (format t "~%Resultado: ~A~%" (+ a b))))
 
-   ;; MULTIPLICACION
-   ((= opcion 3)
-    (format t "~%Ingrese el primer numero: ")
-    (force-output)
-    (let ((a (read)))
-      (format t "Ingrese el segundo numero: ")
-      (force-output)
-      (let ((b (read)))
-        (format t "~%Resultado de la multiplicacion: ~A~%" (* a b)))))
+      ;; RESTA
+      ((= opcion 2)
+       (let ((a (pedir-numero "Ingrese el primer numero: "))
+             (b (pedir-numero "Ingrese el segundo numero: ")))
+         (format t "~%Resultado: ~A~%" (- a b))))
 
-   ;; DIVISION
-   ((= opcion 4)
-    (format t "~%Ingrese el primer numero: ")
-    (force-output)
-    (let ((a (read)))
-      (format t "Ingrese el segundo numero: ")
-      (force-output)
-      (let ((b (read)))
-        (format t "~%Resultado de la division: ~A~%" (/ a b)))))
+      ;; MULTIPLICACION
+      ((= opcion 3)
+       (let ((a (pedir-numero "Ingrese el primer numero: "))
+             (b (pedir-numero "Ingrese el segundo numero: ")))
+         (format t "~%Resultado: ~A~%" (* a b))))
 
-   ;; AREA CUADRADO
-   ((= opcion 5)
-    (format t "~%Ingrese el lado del cuadrado: ")
-    (force-output)
-    (let ((lado (read)))
-      (format t "~%Area del cuadrado: ~A~%" (* lado lado))))
+      ;; DIVISION CON VALIDACION
+      ((= opcion 4)
+       (let ((a (pedir-numero "Ingrese el numerador: "))
+             (b (pedir-numero "Ingrese el denominador: ")))
+         (if (= b 0)
+             (format t "~%Error: no se puede dividir entre 0~%")
+             (format t "~%Resultado: ~A~%" (float (/ a b))))))
 
-   ;; AREA RECTANGULO
-   ((= opcion 6)
-    (format t "~%Ingrese la base del rectangulo: ")
-    (force-output)
-    (let ((base (read)))
-      (format t "Ingrese la altura del rectangulo: ")
-      (force-output)
-      (let ((altura (read)))
-        (format t "~%Area del rectangulo: ~A~%" (* base altura)))))
-   (t
-    (format t "~%Opcion no valida~%"))))
+      ;; AREA CUADRADO
+      ((= opcion 5)
+       (let ((lado (pedir-numero "Ingrese el lado del cuadrado: ")))
+         (format t "~%Resultado: ~A~%" (* lado lado))))
+
+      ;; AREA RECTANGULO
+      ((= opcion 6)
+       (let ((base (pedir-numero "Ingrese la base: "))
+             (altura (pedir-numero "Ingrese la altura: ")))
+         (format t "~%Resultado: ~A~%" (* base altura))))
+
+      ;; OPCION INVALIDA
+      (t
+       (format t "~%Opcion no valida~%")))))
