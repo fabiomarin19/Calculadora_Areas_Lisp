@@ -1,25 +1,73 @@
-(defun suma (a b)
-  (+ a b))
+(format t "~%========== CALCULADORA LISP ==========")
 
-(defun resta (a b)
-  (- a b))
+(format t "~%1. Suma")
+(format t "~%2. Resta")
+(format t "~%3. Multiplicacion")
+(format t "~%4. Division")
+(format t "~%5. Area de cuadrado")
+(format t "~%6. Area de rectangulo")
 
-(defun multiplicacion (a b)
-  (* a b))
+(format t "~%~%Seleccione una opcion: ")
+(defparameter opcion (read))
 
-(defun division (a b)
-  (/ a b))
+(cond
 
-(defun area-cuadrado (lado)
-  (* lado lado))
+ ((= opcion 1)
+  (format t "~%Ingrese el primer numero: ")
+  (defparameter a (read))
 
-(defun area-rectangulo (base altura)
-  (* base altura))
+  (format t "Ingrese el segundo numero: ")
+  (defparameter b (read))
 
-(format t "Suma: ~A~%" (suma 10 5))
-(format t "Resta: ~A~%" (resta 10 5))
-(format t "Multiplicacion: ~A~%" (multiplicacion 10 5))
-(format t "Division: ~A~%" (division 10 5))
+  (format t "~%Resultado de la suma: ~A~%" (+ a b))
+ )
 
-(format t "Area cuadrado: ~A~%" (area-cuadrado 4))
-(format t "Area rectangulo: ~A~%" (area-rectangulo 4 6))
+ ((= opcion 2)
+  (format t "~%Ingrese el primer numero: ")
+  (defparameter a (read))
+
+  (format t "Ingrese el segundo numero: ")
+  (defparameter b (read))
+
+  (format t "~%Resultado de la resta: ~A~%" (- a b))
+ )
+
+ ((= opcion 3)
+  (format t "~%Ingrese el primer numero: ")
+  (defparameter a (read))
+
+  (format t "Ingrese el segundo numero: ")
+  (defparameter b (read))
+
+  (format t "~%Resultado de la multiplicacion: ~A~%" (* a b))
+ )
+
+ ((= opcion 4)
+  (format t "~%Ingrese el primer numero: ")
+  (defparameter a (read))
+
+  (format t "Ingrese el segundo numero: ")
+  (defparameter b (read))
+
+  (format t "~%Resultado de la division: ~A~%" (/ a b))
+ )
+
+ ((= opcion 5)
+  (format t "~%Ingrese el lado del cuadrado: ")
+  (defparameter lado (read))
+
+  (format t "~%Area del cuadrado: ~A~%" (* lado lado))
+ )
+
+ ((= opcion 6)
+  (format t "~%Ingrese la base del rectangulo: ")
+  (defparameter base (read))
+
+  (format t "Ingrese la altura del rectangulo: ")
+  (defparameter altura (read))
+
+  (format t "~%Area del rectangulo: ~A~%" (* base altura))
+ )
+ (t
+  (format t "~%Opcion no valida~%"))
+)
